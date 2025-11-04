@@ -21,29 +21,26 @@ public class MovementTeleop extends LinearOpMode {
         rightFront.setDirection(DcMotor.Direction.REVERSE);
         rightRear.setDirection(DcMotor.Direction.REVERSE);
 
-        double Power = 0.5;
+        double power = 0.5;
 
         waitForStart();
 
         while (opModeIsActive()) {
             if (gamepad1.a){
-                Power = .8;
+                power = .8;
             }
             if (gamepad1.b){
-                Power = .5;
+                power = .5;
             }
-
 
             double y = -gamepad1.left_stick_y;
             double x = gamepad1.left_stick_x;
             double rotation = gamepad1.right_stick_x;
 
-
-
-            double leftFront_Power = (y + x + rotation) * Power;
-            double leftRear_Power = (y - x + rotation) * Power;
-            double rightFront_Power = (y - x - rotation)  * Power;
-            double rightRear_Power = (y + x - rotation)  * Power;
+            double leftFront_Power = (y + x + rotation) * power;
+            double leftRear_Power = (y - x + rotation) * power;
+            double rightFront_Power = (y - x - rotation)  * power;
+            double rightRear_Power = (y + x - rotation)  * power;
 
             leftFront.setPower(leftFront_Power);
             leftRear.setPower(leftRear_Power);

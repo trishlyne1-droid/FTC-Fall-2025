@@ -1,45 +1,36 @@
 package org.firstinspires.ftc.teamcode.TeacherExamples;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name = "OneMotor")
-public class OneMotor extends LinearOpMode {
+public class OneMotor extends OpMode {
+    //Add variables here:
+    double power = 0.0;
+
+    //Add hardware here:
+    DcMotor frontRight = hardwareMap.get(DcMotor.class, "frontRight");
 
     @Override
-    public void runOpMode() throws InterruptedException {
-        DcMotor frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        DcMotor rearRight = hardwareMap.get(DcMotor.class, "rearRight");
-        DcMotor frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        DcMotor rearLeft = hardwareMap.get(DcMotor.class, "rearLeft");
-
+    public void init() {
         // You don't HAVE to do this, but it makes things clear
         frontRight.setDirection(DcMotor.Direction.FORWARD);
-        rearRight.setDirection(DcMotor.Direction.FORWARD);
-        frontLeft.setDirection(DcMotor.Direction.FORWARD);
-        rearLeft.setDirection(DcMotor.Direction.FORWARD);
+    }
 
-        double Power = 0.5;
-
-        waitForStart();
-
-        while (opModeIsActive()) {
-            if (gamepad1.a) {
-                Power = .8;
-            }
-            else if (gamepad1.b) {
-                Power = .5;
-            }
-            else {
-                Power = 0;
-            }
-
-            frontRight.setPower(Power);
-            rearRight.setPower(Power);
-            frontLeft.setPower(Power);
-            rearLeft.setPower(Power);
+    @Override
+    public void loop() {
+        if (gamepad1.a) {
+            power = .8;
         }
+        else if (gamepad1.b) {
+            power = .5;
+        }
+        else {
+            power = 0;
+        }
+
+        frontRight.setPower(power);
     }
 }
